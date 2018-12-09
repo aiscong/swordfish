@@ -25,7 +25,7 @@ def historical_quote(symbols, time_span, bound):
                                         '1w10min': ['10minute', 'week'],
                                         '1y1d': ['day', 'year'],
                                         '5y1w': ['week', '']}
-    hirtorical_data_bounds = ['extended', 'regular']
+    # historical_data_bounds = ['extended', 'regular']
 
     symbols_list = ','.join(symbols).upper()
     interval = historical_data_freq_combination[time_span][0]
@@ -35,14 +35,13 @@ def historical_quote(symbols, time_span, bound):
           '&interval=' + interval + '&span=' + span + '&bounds=' + bound.lower()
 
     quote_json = caller.get(url)
+    result = {}
 
-    quote = HistoricalPoint(quote_json)
+    for raw_json_point_list in quote_json:
+        result_list = []
+        for raw_json_point in raw_json_point_list['historicals']:
+            historical_point = HistoricalPoint(raw_json_point)
+            result_list.append(historical_point)
+        result[raw_json_point_list['symbol']] = result_list
 
-
-
-    def pull_historical_data(stock, period, bounds):
-        caller = HttpCaller()
-        historical_url = caller.get_historical_quotes_url(stock, period[0], period[1], bounds)
-        print(historical_url)
-        quote_json = caller.get(historical_url)
-        print(quote_json)
+    return result
