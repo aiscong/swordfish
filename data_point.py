@@ -20,5 +20,13 @@ class CurrentPoint:
         self.timestamp = datetime.datetime.strptime(json_response["updated_at"], DATETIME_FORMAT)
 
 
+class HistoricalPoint:
 
+    def __init__(self, json_response):
+        self.timestamp = datetime.datetime.strptime(json_response["begins_at"], DATETIME_FORMAT)
+        self.open = float(json_response["open_price"])
+        self.close = float(json_response["close_price"])
+        self.high = float(json_response["high_price"])
+        self.low = float(json_response["low_price"])
+        self.vol = int(json_response["volume"])
 
