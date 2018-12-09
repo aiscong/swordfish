@@ -1,12 +1,9 @@
-from http_caller import *
-from data_point import *
+from quote import *
 
 def main():
-    caller = HttpCaller()
-    quote_json = caller.get("https://api.robinhood.com/quotes/MSFT/")
-    quote = CurrentPoint(quote_json)
-    print(quote_json)
-    print(quote.previous_close_date)
+    print(current_quote(['MSFT', 'FB', 'TSLA']))
+    print("====historical starts below=======")
+    print(historical_quote(['MSFT', 'FB', 'TSLA'], '1d5min', 'regular'))
 
 
 main()

@@ -2,6 +2,7 @@
 from http_caller import *
 from data_point import *
 
+
 def current_quote(symbols):
     caller = HttpCaller()
     symbol_list = ','.join(symbols).upper()
