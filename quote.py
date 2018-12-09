@@ -2,6 +2,19 @@
 from http_caller import *
 from data_point import *
 
+def current_quote(symbols):
+    caller = HttpCaller()
+    symbol_list = ','.join(symbols).upper()
+    url = 'https://api.robinhood.com/quotes/?symbols=' + symbol_list
+    quote_json = caller.get(url)
+    result = {}
+    for raw_json_point in quote_json['results']:
+        current_point = CurrentPoint(raw_json_point)
+        result[current_point.symbol] = current_point
+
+    return result
+
+
 def historical_quote(symbols, time_span, bound):
 
     caller = HttpCaller()
