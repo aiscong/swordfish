@@ -1,17 +1,17 @@
 from http_caller import *
-from quote_point import *
+from data_point import *
 
 def main():
     caller = HttpCaller()
     quote_json = caller.get("https://api.robinhood.com/quotes/MSFT/")
-    quote = QuotePoint(quote_json)
+    quote = CurrentPoint(quote_json)
     print(quote_json)
     print(quote.previous_close_date)
 
 
 main()
 
-historical_data_freq_combination = {'1day(5minute)': ['5minute', 'day'],
+historical_data_freq_combination = {'1d(5minute)': ['5minute', 'day'],
                                     '1day(10minute)': ['10minute', 'day'],
                                     '1week(5minute)': ['5minute', 'week'],
                                     '1week(10minute)': ['10minute', 'week'],
@@ -32,3 +32,7 @@ def pull_historical_data(stock, period, bounds):
 
 
 pull_historical_data(stock, period, bounds)
+
+
+
+#

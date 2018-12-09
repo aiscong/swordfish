@@ -6,7 +6,7 @@ DATE_FORMAT = "%Y-%m-%d"
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 
-class QuotePoint:
+class CurrentPoint:
 
     def __init__(self, json_response):
         self.ask_price = float(json_response["ask_price"])
