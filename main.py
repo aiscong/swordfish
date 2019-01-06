@@ -5,13 +5,13 @@ import sys
 
 def main():
 
-    print(current_quote(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
-    threading.Timer(3, main).start()
+    # print(current_quote(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
+    # threading.Timer(3, main).start()
     #
     # print(historical_quote(['TQQQ', 'TVIX'], '1d5min', 'regular'))
 
     # print(get_instrument('MSFT'))
-    #
+    print(get_instruments(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
     #
     # while (True):
     #     line = input("> ")
