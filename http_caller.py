@@ -2,7 +2,7 @@ import requests
 
 class HttpCaller:
 
-    def get(self, url, params):
+    def get(self, url, params={}):
         response = requests.get(url, params=params)
         return response.json()
 
