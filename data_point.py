@@ -19,6 +19,8 @@ class CurrentPoint:
         self.symbol = json_response["symbol"]
         self.timestamp = datetime.datetime.strptime(json_response["updated_at"], DATETIME_FORMAT)
 
+    def __repr__(self):
+        return str(self.timestamp.time()) + " -> $" + str(self.price)
 
 class HistoricalPoint:
 
@@ -30,3 +32,14 @@ class HistoricalPoint:
         self.low = float(json_response["low_price"])
         self.vol = int(json_response["volume"])
 
+    def __repr__(self):
+        return str(self.timestamp.time()) + " -> $" + str(self.open)
+
+class Instrument:
+
+    def __init__(self, json_response):
+        self.id = json_response['id']
+        self.symbol = json_response['symbol']
+
+    def __repr__(self):
+        return str(self.symbol) + " -> " + str(self.id)

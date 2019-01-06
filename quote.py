@@ -6,8 +6,9 @@ from data_point import *
 def current_quote(symbols):
     caller = HttpCaller()
     symbol_list = ','.join(symbols).upper()
-    url = 'https://api.robinhood.com/quotes/?symbols=' + symbol_list
-    quote_json = caller.get(url)
+    params = {'symbols': symbol_list}
+    url = 'https://api.robinhood.com/quotes/'
+    quote_json = caller.get(url, params)
     result = {}
     for raw_json_point in quote_json['results']:
         current_point = CurrentPoint(raw_json_point)
@@ -25,12 +26,12 @@ def historical_quote(symbols, time_span, bound):
                                         '1y1d': ['day', 'year'],
                                         '5y1w': ['week', '']}
     # historical_data_bounds = ['extended', 'regular']
-    symbols_list = ','.join(symbols).upper()
+    symbol_list = ','.join(symbols).upper()
     interval = historical_data_freq_combination[time_span][0]
     span = historical_data_freq_combination[time_span][1]
-    url = 'https://api.robinhood.com/quotes/historicals/?symbols=' + symbols_list + \
-          '&interval=' + interval + '&span=' + span + '&bounds=' + bound.lower()
-    quote_json = caller.get(url)
+    params = {'symbols': symbol_list, 'interval': interval, 'span': span, 'bounds': bound.lower()}
+    url = 'https://api.robinhood.com/quotes/historicals/'
+    quote_json = caller.get(url, params)
     result = {}
     for raw_json_point_list in quote_json['results']:
         result_list = []
