@@ -1,5 +1,5 @@
-import datetime
 
+import datetime
 
 # Global Variables
 DATE_FORMAT = "%Y-%m-%d"
@@ -22,6 +22,7 @@ class CurrentPoint:
     def __repr__(self):
         return str(self.timestamp.time()) + " -> $" + str(self.price)
 
+
 class HistoricalPoint:
 
     def __init__(self, json_response):
@@ -34,6 +35,17 @@ class HistoricalPoint:
 
     def __repr__(self):
         return str(self.timestamp.time()) + " -> $" + str(self.open)
+
+    def to_dict(self):
+        return {
+            'timestamp': self.timestamp,
+            'open': self.open,
+            'close': self.close,
+            'high': self.high,
+            'low': self.low,
+            'vol': self.vol
+        }
+
 
 class Instrument:
 
