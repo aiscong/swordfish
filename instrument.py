@@ -16,3 +16,7 @@ def get_instrument(symbol):
     caller = HttpCaller()
     return Instrument(caller.get(url, params)['results'][0])
 
+
+def get_instrument_by_id_url(id_url):
+    caller = HttpCaller()
+    return Instrument(caller.get(id_url))
