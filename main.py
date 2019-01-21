@@ -13,12 +13,11 @@ def main():
     #
     # print(historical_quote(['TQQQ', 'TVIX'], '1d5min', 'regular'))
 
-    # print(get_instrument('MSFT'))
+    print(get_instrument('MSFT'))
     # print(get_instruments(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
     auth = open('safe', 'r').readline().split(':')
     trader = Trader(auth[0], auth[1])
-    print(historical_quote(trader, ['TQQQ', 'TVIX'], '1d5min', 'regular'))
-
+    # print(trader.get_account())
 
     # caller = HttpCaller()
     # popular = caller.get('https://api.robinhood.com/midlands/tags/tag/100-most-popular/')['instruments']
