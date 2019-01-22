@@ -1,6 +1,7 @@
 from http_caller import *
 from instrument import *
 from enum import Enum
+from quote import *
 
 
 class Side(Enum):
@@ -44,6 +45,80 @@ class Trader:
     def get_account(self):
         return self.caller.session_get(self.account_url)['results'][0]
 
+    def market_buy(self, symbol, quantity):
+        price = current_quote(self, [symbol]).get(symbol).bid_price
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.MARKET,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.IMMEDIATE,
+                                 price=price,
+                                 quantity=quantity,
+                                 side=Side.BUY)
+
+    def market_sell(self, symbol, quantity):
+        price = current_quote(self, [symbol]).get(symbol).bid_price
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.MARKET,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.IMMEDIATE,
+                                 price=price,
+                                 quantity=quantity,
+                                 side=Side.SELL)
+
+    def limit_buy(self, symbol, limit_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.LIMIT,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.IMMEDIATE,
+                                 price=limit_price,
+                                 quantity=quantity,
+                                 side=Side.BUY)
+
+    def limit_sell(self, symbol, limit_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.LIMIT,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.IMMEDIATE,
+                                 price=limit_price,
+                                 quantity=quantity,
+                                 side=Side.SELL)
+
+    def stop_market_buy(self, symbol, stop_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.MARKET,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.STOP,
+                                 stop_price=stop_price,
+                                 quantity=quantity,
+                                 side=Side.BUY)
+
+    def stop_market_sell(self, symbol, stop_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.MARKET,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.STOP,
+                                 stop_price=stop_price,
+                                 quantity=quantity,
+                                 side=Side.SELL)
+
+    def stop_limit_buy(self, symbol, stop_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.LIMIT,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.STOP,
+                                 stop_price=stop_price,
+                                 quantity=quantity,
+                                 side=Side.BUY)
+
+    def stop_limit_sell(self, symbol, stop_price, quantity):
+        return self.submit_order(symbol=symbol,
+                                 order_type=OrderType.LIMIT,
+                                 time_in_force=TimeInForce.GOOD_FOR_DAY,
+                                 trigger=Trigger.STOP,
+                                 stop_price=stop_price,
+                                 quantity=quantity,
+                                 side=Side.SELL)
+
     def submit_order(self,
                      symbol='',
                      order_type=None,
@@ -55,7 +130,7 @@ class Trader:
                      side=None):
         symbol = symbol.upper()
         if isinstance(order_type, OrderType):
-            raise(ValueError('Invalid order type'))
+            raise (ValueError('Invalid order type'))
 
         payload = {
             'account': self.get_account()['url'],
