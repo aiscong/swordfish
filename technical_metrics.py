@@ -42,7 +42,6 @@ def simple_moving_historical_volatility(data, windowSize):
 # momentum indicators
 
 # Moving Average Convergence/Divergence Oscillator
-# https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd
 def MACD(data, fastEMA=12, slowEMA=26, signalEMA=9):
     """
     :param data: input values [type: pd.Series/pd.DataFrame] [index: datetime]

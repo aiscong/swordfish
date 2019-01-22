@@ -17,7 +17,7 @@ bound = 'regular'
 auth = open('safe', 'r').readline().split(':')
 trader = Trader(auth[0], auth[1])
 
-for i in range((len(symbols) - 1)/75 + 1):
+for i in range((len(symbols) - 1)//75 + 1):
     start_index = 75*i
     end_index = min(75*(i+1), len(symbols))
     output = historical_quote(trader, symbols[start_index:end_index], time_span, bound)
