@@ -51,6 +51,7 @@ class Instrument:
 
     def __init__(self, json_response):
         self.id = json_response['id']
+        self.url = json_response['url']
         self.symbol = json_response['symbol']
 
     def __repr__(self):

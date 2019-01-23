@@ -33,6 +33,7 @@ class Trader:
     positions_url = 'https://api.robinhood.com/positions/'
     account_url = 'https://api.robinhood.com/accounts/'
     order_url = 'https://api.robinhood.com/orders/'
+    get_order_url = 'https://api.robinhood.com/orders/{id}/'
 
     caller = HttpCaller()
 
@@ -128,24 +129,35 @@ class Trader:
                      stop_price=None,
                      quantity=None,
                      side=None):
+        
         symbol = symbol.upper()
-        if isinstance(order_type, OrderType):
-            raise (ValueError('Invalid order type'))
 
         payload = {
             'account': self.get_account()['url'],
-            'instrument': get_instrument(symbol)['url'],
+            'symbol': symbol,
+            'instrument': get_instrument(symbol).url,
             'type': OrderType(order_type).value,
-            'time_in_type': TimeInForce(time_in_force).value,
+            'time_in_force': TimeInForce(time_in_force).value,
             'trigger': Trigger(trigger).value,
             'price': price,
-            'stop_price': stop_price,
             'quantity': quantity,
             'side': Side(side).value
         }
+
+        if Trigger(trigger) == Trigger.STOP:
+            payload['stop_price'] = stop_price
+
         print(payload)
 
-        self.caller.session_post(self.order_url, payload)
+        print('======================================')
+
+        order_response = self.caller.session_post(self.order_url, payload)
+
+        print(order_response)
+        return order_response
+
+    def check_order(self, order_id):
+        return self.caller.session_get(self.get_order_url.format(id=order_id))
 
     def log_in(self, username, password):
         payload = {'username': username,

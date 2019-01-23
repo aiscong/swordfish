@@ -13,10 +13,12 @@ def main():
     #
     # print(historical_quote(['TQQQ', 'TVIX'], '1d5min', 'regular'))
 
-    print(get_instrument('MSFT'))
+    # print(get_instrument('MSFT'))
     # print(get_instruments(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
     auth = open('safe', 'r').readline().split(':')
     trader = Trader(auth[0], auth[1])
+    trader.market_sell('WFT', 1)
+    print(trader.check_order('62c0263a-3f3b-4bde-ab23-962ca671b820'))
     # print(trader.get_account())
 
     # caller = HttpCaller()
