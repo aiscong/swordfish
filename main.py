@@ -18,13 +18,15 @@ def main():
     auth = open('safe', 'r').readline().split(':')
     trader = Trader(auth[0], auth[1])
     trader.market_sell('WFT', 1)
-    print(trader.check_order('62c0263a-3f3b-4bde-ab23-962ca671b820'))
+    # print(trader.get_order('62c0263a-3f3b-4bde-ab23-962ca671b820'))
+    trader.log_out()
+
     # print(trader.get_account())
 
     # caller = HttpCaller()
     # popular = caller.get('https://api.robinhood.com/midlands/tags/tag/100-most-popular/')['instruments']
     #
-    # # print(watch_list)
+    # print(watch_list)
     # symbols = set()
     # for pop in popular:
     #     symbols.add(get_instrument_by_id_url(pop).symbol)

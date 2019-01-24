@@ -129,7 +129,7 @@ class Trader:
                      stop_price=None,
                      quantity=None,
                      side=None):
-        
+
         symbol = symbol.upper()
 
         payload = {
@@ -153,11 +153,15 @@ class Trader:
 
         order_response = self.caller.session_post(self.order_url, payload)
 
-        print(order_response)
+        print('order id:' + order_response['id'])
+        print('order state: ' + order_response['state'])
         return order_response
 
-    def check_order(self, order_id):
+    def get_order(self, order_id):
         return self.caller.session_get(self.get_order_url.format(id=order_id))
+
+    def cancel_order(self, order):
+        return self.caller.session_post(order['cancel'])
 
     def log_in(self, username, password):
         payload = {'username': username,
