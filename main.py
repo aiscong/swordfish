@@ -17,7 +17,7 @@ def main():
     # print(get_instruments(['TQQQ', 'TVIX', 'SPY', 'QQQ']))
     auth = open('safe', 'r').readline().split(':')
     trader = Trader(auth[0], auth[1])
-    trader.market_sell('WFT', 1)
+    trader.market_sell('TQQQ', 100)
     # print(trader.get_order('62c0263a-3f3b-4bde-ab23-962ca671b820'))
     trader.log_out()
 
