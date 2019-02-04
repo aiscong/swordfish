@@ -19,7 +19,7 @@ class HttpCaller:
         response = self.session.get(url, params=params)
         return response.json()
 
-    def session_post(self, url, json_payload):
+    def session_post(self, url, json_payload={}):
         response = self.session.post(url, json=json_payload)
         return response.json()
 
