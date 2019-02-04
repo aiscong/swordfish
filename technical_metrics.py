@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import datetime
 # reference website
 # https://pyalgotrade-docs-zh-cn.readthedocs.io/zh_CN/latest/technical.html#module-pyalgotrade.technical.macd/
 
@@ -11,12 +12,14 @@ data = pd.read_csv(os.getcwd() + '/historical_data/AAPL.csv', index_col=0)
 # returns
 
 
-def log_return(data):
+def log_return(data, start_date, end_date):
     """
     :param data: input values [type: pd.Series/pd.DataFrame] [index: datetime]
     :return: log returns [type: pd.Series/pd.DataFrame] [index: datetime]
     """
-    return np.log(data / data.shift(1)) - 1
+    data.index = pd.to_datetime(data.index)
+    df = data.loc[start_date:end_date]
+    return np.log(df['close'].iloc[-1] / df['close'].iloc[0])
 
 
 ####################################
@@ -68,3 +71,5 @@ def macd(data, fast_span=12, slow_span=26, signal_span=9):
     macd_histogram = macd - signal
 
     return macd, signal, macd_histogram
+
+print(log_return(data, start_date='2019-01-23', end_date='2019-01-23'))
