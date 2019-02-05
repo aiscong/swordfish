@@ -39,22 +39,14 @@ def sma(data, window_size):
 # volatility indicator
 
 
-<<<<<<< HEAD
-def simple_moving_historical_volatility(data, windowSize):
-=======
 def simple_moving_historical_volatility(data, window_size):
->>>>>>> 7e574d68c1cded4fabd0c8232848f4850c699920
     """
     :param data: input values [type: pd.Series/pd.DataFrame] [index: datetime]
     :param window_size: moving average window in mins [type: int]
     :return: simple moving average historical volatility [type: pd.Series/pd.DataFrame] [index: datetime]
     """
-<<<<<<< HEAD
-    return data.rolling(window=(windowSize//5)).std() * np.sqrt(windowSize)
-=======
     return data.rolling(window=(window_size // 5)).std() * np.sqrt(window_size)
-
->>>>>>> 7e574d68c1cded4fabd0c8232848f4850c699920
+    
 
 ####################################
 # momentum indicators
