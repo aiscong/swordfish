@@ -1,9 +1,9 @@
 
 import glob
 import pandas as pd
+import os
 
-
-file_list = glob.glob("/Users/j0y01rf/PycharmProjects/swordfish/historical_data/*.csv")
+file_list = glob.glob(os.getcwd() + "/historical_data/*.csv")
 
 for file in file_list:
     print(file)
