@@ -9,8 +9,8 @@ symbols = symbols.iloc[0, :].values
 black_list = ['MULE', 'VXX', 'P', 'WIN']
 
 symbols = np.setdiff1d(symbols, black_list)
-# time_span = '1w5min'
-time_span = '1d5min'
+time_span = '15min'
+# time_span = '1d5min'
 bound = 'regular'
 
 auth = open('safe', 'r').readline().split(':')
