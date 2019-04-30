@@ -167,6 +167,8 @@ class Trader:
         payload = {'username': username,
                    'password': password,
                    'grant_type': 'password',
+                   'scope': 'internal',
+                   'device_token': '6a870fe7-9a46-45c3-b09e-27910651cde9',
                    'client_id': self.client_id}
         log_in_response = self.caller.post(self.log_in_url, payload)
 

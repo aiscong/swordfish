@@ -9,7 +9,8 @@ cd $HOME_PATH
 if [[ "$TODAY" =~ ^(20190101|20190121|20190218|20190419|20190524|20190704|20190902|20191128|20191225)$ ]]; then
     mail -s 'Stock market closed today' ${EMAIL} < /dev/null
 else
-    if python3 ${HOME_PATH}/historical_quote_cron.py; then
+#    if python3 ${HOME_PATH}/historical_quote_cron.py; then
+    if /Library/Frameworks/Python.framework/Versions/3.7/bin/python3 ${HOME_PATH}/historical_quote_cron.py; then
         echo 'Pull historical quote finished successfully at '$TIMESTAMP_FOLDER''
         mail -s "SUCCESS: Pull historical quote" ${EMAIL} < /dev/null
     else
