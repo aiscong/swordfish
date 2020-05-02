@@ -12,10 +12,10 @@ else
 #    if python3 ${HOME_PATH}/historical_quote_cron.py; then
     if /Library/Frameworks/Python.framework/Versions/3.7/bin/python3 ${HOME_PATH}/historical_quote_cron.py; then
         echo 'Pull historical quote finished successfully at '$TIMESTAMP_FOLDER''
-        mail -s "SUCCESS: Pull historical quote" ${EMAIL} < /dev/null
+#        mail -s "SUCCESS: Pull historical quote" ${EMAIL} < /dev/null
     else
         echo 'Pull historical quote exited with error at '$TIMESTAMP_FOLDER''
-        mail -s "FAILED: Pull historical quote" ${EMAIL} < /dev/null
+#        mail -s "FAILED: Pull historical quote" ${EMAIL} < /dev/null
     fi
 fi
 
